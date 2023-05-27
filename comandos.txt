@@ -1,0 +1,33 @@
+Comandos de Apache:
+
+sudo systemctl start apache2: Inicia el servicio de Apache.
+sudo systemctl stop apache2: Detiene el servicio de Apache.
+sudo systemctl restart apache2: Reinicia el servicio de Apache.
+sudo systemctl status apache2: Muestra el estado del servicio de Apache.
+sudo a2ensite nombre_del_sitio.conf: Habilita un sitio web específico en Apache.
+sudo a2dissite nombre_del_sitio.conf: Deshabilita un sitio web específico en Apache.
+sudo a2enmod nombre_del_módulo: Habilita un módulo específico de Apache.
+sudo a2dismod nombre_del_módulo: Deshabilita un módulo específico de Apache.
+sudo apache2ctl configtest: Verifica la configuración de Apache en busca de errores.
+Comandos de MySQL:
+
+sudo systemctl start mysql: Inicia el servicio de MySQL.
+sudo systemctl stop mysql: Detiene el servicio de MySQL.
+sudo systemctl restart mysql: Reinicia el servicio de MySQL.
+sudo systemctl status mysql: Muestra el estado del servicio de MySQL.
+mysql -u usuario -p: Inicia una sesión de MySQL con el usuario especificado. Se te pedirá ingresar la contraseña.
+sudo mysql: Inicia una sesión de MySQL como el usuario root. Se te pedirá ingresar la contraseña.
+Comandos de PHP:
+
+php --version: Muestra la versión de PHP instalada en el sistema.
+sudo nano /etc/php/version/php.ini: Abre el archivo de configuración de PHP en el editor Nano. Reemplaza "version" con la versión específica de PHP instalada.
+sudo systemctl restart apache2: Reinicia Apache para aplicar los cambios en la configuración de PHP.
+Otros comandos útiles:
+
+sudo tail -f /var/log/apache2/error.log: Muestra en tiempo real los registros de errores de Apache.
+sudo tail -f /var/log/mysql/error.log: Muestra en tiempo real los registros de errores de MySQL.
+sudo systemctl start nombre_del_servicio: Inicia un servicio específico utilizando el sistema de control de systemd.
+sudo systemctl stop nombre_del_servicio: Detiene un servicio específico utilizando el sistema de control de systemd.
+sudo systemctl restart nombre_del_servicio: Reinicia un servicio específico utilizando el sistema de control de systemd.
+sudo systemctl status nombre_del_servicio: Muestra el estado de un servicio específico utilizando el sistema de control de systemd.
+Recuerda reemplazar "nombre_del_sitio.conf" con el nombre del archivo de configuración de tu sitio web en Apache, y "nombre_del_módulo" con el nombre del módulo que deseas habilitar o deshabilitar en Apache.

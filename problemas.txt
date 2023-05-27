@@ -1,0 +1,14 @@
+Problemas comunes y soluciones:
+
+Problema: Error al acceder a la página web después de instalar LAMP.
+
+Solución: Verifica si Apache está en funcionamiento usando el comando sudo systemctl status apache2. Si Apache no se está ejecutando, reinícialo con sudo systemctl restart apache2.
+Problema: Error al acceder a la página de inicio de Apache.
+
+Solución: Asegúrate de haber instalado Apache correctamente y de que el firewall no esté bloqueando el tráfico. Verifica la configuración de tu firewall o desactívalo temporalmente para probar la conexión.
+Problema: Error de permisos al acceder a los archivos de WordPress.
+
+Solución: Asegúrate de que los permisos adecuados estén configurados para la carpeta de WordPress. Utiliza los comandos sudo chown -R www-data:www-data /var/www/html/wordpress y sudo chmod -R 755 /var/www/html/wordpress para establecer los permisos correctos.
+Problema: Error al conectar con la base de datos de MySQL en la instalación de WordPress.
+
+Solución: Verifica que los datos de configuración de la base de datos en el archivo wp-config.php sean correctos. Asegúrate de haber creado la base de datos y el usuario de MySQL correctamente y de que se hayan otorgado los privilegios necesarios.

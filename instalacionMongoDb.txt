@@ -1,0 +1,46 @@
+Aquí tienes una guía detallada para instalar MongoDB con interfaz gráfica en Windows y luego conectarlo con XAMPP:
+
+Paso 1: Descargar e instalar MongoDB Community Edition
+
+Ve al sitio web oficial de MongoDB (https://www.mongodb.com/) y navega hasta la sección "Community Server" (Servidor comunitario).
+Haz clic en "Download" (Descargar) y selecciona la versión adecuada para tu sistema operativo Windows.
+Descarga el archivo de instalación y ejecútalo.
+Sigue las instrucciones del asistente de instalación para completar la instalación de MongoDB en tu sistema.
+Paso 2: Descargar e instalar MongoDB Compass (interfaz gráfica)
+
+Ve al sitio web oficial de MongoDB (https://www.mongodb.com/) y navega hasta la sección "Tools" (Herramientas).
+Haz clic en "Download" (Descargar) bajo la sección "MongoDB Compass".
+Descarga el archivo de instalación y ejecútalo.
+Sigue las instrucciones del asistente de instalación para completar la instalación de MongoDB Compass en tu sistema.
+Paso 3: Configurar MongoDB
+
+Abre una ventana del símbolo del sistema (Command Prompt) como administrador.
+Navega hasta el directorio de instalación de MongoDB. Por defecto, suele ser "C:\Program Files\MongoDB\Server{versión}\bin", donde "{versión}" es la versión de MongoDB instalada.
+Ejecuta el siguiente comando para iniciar el servidor de MongoDB:
+arduino
+Copy code
+mongod --dbpath "C:\data\db"
+Esto iniciará el servidor de MongoDB en el puerto predeterminado 27017.
+Paso 4: Conectar MongoDB con XAMPP
+
+Abre XAMPP y asegúrate de que el servidor Apache y MySQL estén detenidos.
+En el directorio de instalación de XAMPP, busca la carpeta "php" y luego abre el archivo "php.ini" en un editor de texto.
+Busca la línea que contiene "extension=" y descomenta (elimina el punto y coma al principio) la línea que carga la extensión de MongoDB. Por ejemplo, puede ser:
+makefile
+Copy code
+extension=php_mongodb.dll
+Guarda el archivo "php.ini" y ciérralo.
+En el directorio de instalación de XAMPP, busca la carpeta "apache" y luego abre el archivo "httpd.conf" en un editor de texto.
+Busca la sección que comienza con "<IfModule mime_module>" y agrega las siguientes líneas al final de la sección:
+bash
+Copy code
+AddType application/x-httpd-php .php
+AddType application/x-httpd-php-source .phps
+Guarda el archivo "httpd.conf" y ciérralo.
+Reinicia XAMPP y asegúrate de que el servidor Apache esté en funcionamiento.
+Paso 5: Conectar MongoDB Compass con MongoDB
+
+Abre MongoDB Compass.
+En la pantalla de conexión, deja los campos "Hostname" (Nombre del host) y "Port" (Puerto) tal como están (localhost y 27017 respectivamente).
+Haz clic en el botón "Connect" (Conectar) para establecer la conexión con MongoDB.
+Ahora puedes administrar y consultar tus bases de datos y colecciones

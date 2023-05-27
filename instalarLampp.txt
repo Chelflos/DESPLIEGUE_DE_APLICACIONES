@@ -1,0 +1,51 @@
+Parte 1: Instalación de la pila LAMP en Ubuntu 22.04
+
+Actualiza el sistema:
+
+
+ 
+sudo apt update
+sudo apt upgrade
+Instala Apache:
+
+ 
+sudo apt install apache2
+
+Verifica si Apache se ha instalado correctamente ingresando la dirección IP de tu servidor en un navegador web. 
+Deberías ver una página de inicio de Apache.
+
+Instala MySQL:
+
+ 
+sudo apt install mysql-server
+Durante la instalación de MySQL, se te pedirá ingresar una contraseña para el usuario root de MySQL. 
+Elige una contraseña segura y recuérdala.
+
+Ejecuta el script de seguridad de MySQL para mejorar la seguridad de la instalación:
+
+ 
+sudo mysql_secure_installation
+Durante el proceso de configuración, se te harán varias preguntas. Se recomienda seguir las recomendaciones predeterminadas para una configuración básica.
+
+Instala PHP y los módulos necesarios:
+
+
+ 
+sudo apt install php libapache2-mod-php php-mysql
+Reinicia Apache para que los cambios surtan efecto:
+
+ 
+sudo systemctl restart apache2
+Verifica si PHP está funcionando correctamente creando un archivo de prueba:
+
+php
+ 
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/phpinfo.php
+
+Abre un navegador web e ingresa la dirección IP de tu servidor seguida de "/phpinfo.php". Deberías ver una página con información detallada sobre la configuración de PHP.
+
+
+
+
+
+

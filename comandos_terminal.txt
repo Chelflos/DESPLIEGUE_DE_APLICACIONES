@@ -1,0 +1,329 @@
+GRUPOS Y USUARIOS
+
+
+Añadir un usuario:
+sudo adduser nombreUsuario
+
+
+Eliminar un usuario:
+sudo userdel nombreUsuario
+
+Añadir un grupo:
+sudo groupadd nombreGrupo
+
+Eliminar un grupo:
+sudo groupdel nombreGrupo
+
+Añadir usuario a un grupo:
+sudo adduser nombreUsuario GrupoUsuario
+
+Un caso en el que esto puede serte de utilidad es si se ha creado un usuario nuevo y se trabaja en una distribución, como Ubuntu, en el que el usuario Root está deshabilitado. En este caso, si se quiere que el nuevo usuario pueda hacer uso «sudo», será necesario añadirlo al grupo:
+sudo adduser nombreUsuario sudo
+
+Eliminar usuario de un grupo:
+sudo deluser nombreUsuario nombreGrupo
+
+
+Ver todos los ususarios de un grupo:
+En Linux, toda la información relativa a los usuarios es almacenada en un archivo de texto. Este archivo es /etc/passwd. Mediante este archivo también podrás editar sus propiedades, aunque es recomendable utilizarlo únicamente a modo informativo (de ahí el hecho de no abrirlo con sudo), y utilizar los comandos apropiados en caso de querer modificar algo.
+Si se quiere listar todos lo usuarios a través de la consola, tan solo se debe leer el contenido del fichero mediante el comando escrito a continuación. No es necesario  el sudo delante, pues lo abriremos en modo lectura, así se asegura de no modificar nada por error. 
+Las contraseñas obviamente no se muestran en texto plano en este archivo, sino que van protegidas por hash aparte.
+cat-etc-passwd
+
+
+CAMBIAR USUARIO PROPIETARIO
+
+
+Comando chown:
+El comando que sirve para cambiar el propietario de un determinado archivo o directorio a nivel de user es chown. Hay que tener en cuenta que al cambiar el usuario propietario de un fichero, el grupo propietario no variará. Aunque el nuevo usuario pertenezca a otro grupo distinto, el grupo propietario del fichero seguirá siendo el de antes.
+En este caso, el grupo no cambiará:
+sudo chown -R usuario rutaDirectorio
+En caso de que se trate de un directorio, si quieres que la orden se aplique de forma recursiva para todos los ficheros contenido en él, el comando será el siguiente. Si utilizas este mismo comando sin el parámetro -R, el cambio que hayas especificado solo tendrá efecto sobre el directorio, pero no sobre su contenido.
+sudo chown -R usuario rutaDirectorio
+
+
+CAMBIAR GRUPO PROPIETARIO
+
+Comando chgrp:
+Para cambiar el grupo propietario, se puede utilizar chgrp, aunque también se puede hacer mediante chown.
+Igual que ocurre al cambiar el propietario a nivel usuario, el grupo cambia, pero el usuario seguirá siendo el mismo.
+sudo chgrp nombreGrupo rutaArchivo
+
+En caso de que se trate de un directorio, si se quiere que la orden se aplique de forma recursiva a todo su contenido, se utiliza el parámetro -R:
+sudo chgrp -R nombreGrupo rutaArchivo
+Se puede cambiar el grupo propietario con chown consiste en especificar un grupo, pero no indicar el usuario. En este ultimo caso, la operación es la misma que realiza el comando chgrp. La sintaxis es la siguiente:
+
+sudo chown :nombreGrupo rutaArchivo
+Si quieres cambiar tanto el usuario como el grupo al que pertenece un determinado fichero:
+sudo chown usuario :grupo rutaArchivo
+ASIGNAR PERMISOS
+
+Comando Chmod:
+Sirve para establecer permisos de archivos en Linux. Se puede utilizar de dos formas, en modo texto u en modo octal.
+Modo numérico u octal
+Permite la asignación de privilegios de manera absoluta (sin tener en cuenta el esquema de permisos anterior) y con menos texto que en el formato texto:
+	- - - - -  sudo chmod XYZ rutaArchivo - - - - -
+	Donde  --> 	X  =  permisos del usuario propietario.
+			Y = permisos del grupo propietario.
+			Z = permisos del resto de usuarios.
+Éstos permisos pueden ser cualquier número entero del 0 al 7, teniendo en cuenta:
+			0 = Ningún permiso.
+			1 = Dar permiso de ejecución.
+			2 = Dar permiso de escritura.
+			4 = Dar permiso de lectura.
+
+Cualquier combianación de éstos valores equivale a la combinación de permisos. Así: 
+			0 = Ningún permiso.
+			1 =Ejecución.
+			2 = Escritura.
+			3 = Escritura y ejecución.
+			4 = Lectura.
+			5 = Lectura y ejecución.
+			6 = Lectura y escritura.
+			7 =Lectura, escritura y ejecución.
+Para cambiar los privilegios de un directorio, la sentencia es la misma. Si se quiere aplicar de forma recursiva a todo su contenido:
+
+sudo chmod XYZ -R rutaDirectorio
+Modo texto:
+	------sudo chmod [u, g, o][=, +, -][r,w,x] rutaArchivo------
+En esta representación, el primer parámetro después del chmod expresa el nivel al que queremos asociar un determinado permiso.
+			U = Usuario.
+			G = Grupo.
+			O = Otros.
+Seguidamente tenemos el modificador. Esto nos permite especificar un permiso de forma absoluta (=) o bien de forma relativa al permiso actual (+, -).
+			= -->  Asignar un permiso de forma absoluta.
+			+ --> Añadir un permiso.
+			- -->  Quitar un permiso.
+Por ultimo, seguido del modificador tenemos el modo o tipo de permiso que queremos asignar, o quitar, que básicamente son:
+			r = Lectura.
+			w = Escritura.
+			x = Ejecución.
+Para cambiar los permisos de un directorio, la sentencia es exactamente la misma, teniendo en cuenta que, como tal, solamente aplicara al directorio en cuestión y no a su contenido. Si se quiere que se aplique de forma recursiva para todo el contenido, deberemos utilizar el comando así:
+	sudo chmod [u, g, o][=, +, -][r,w,x]  -R rutaArchivo
+
+COMANDOS BÁSICOS
+
+APT, Advanced Packaging Tool
+instalar nuevos paquetes:
+	sudo apt install programa
+Actualizar los repositorios de Linux:
+	sudo apt update
+Actualizar los paquetes y programas:
+	sudo apt upgrade
+Actualizar el sistema sin problemas:
+	sudo apt full-upgrade
+Ver una lista de los paquetes para instalar o actualizar:
+	sudo apt list
+Buscar paquetes:
+	sudo apt search paquete
+Ver los detalles de un paquete:
+	sudo apt show paquete
+Reinstalar un paquete:
+	sudo apt reinstall paquete
+Eliminar paquetes instalados:
+	sudo apt remove paquete
+Eliminar paquetes y limpiar rastros:
+	sudo apt purge paquete
+Eliminar dependencias no utilizadas:
+	sudo apt autoremove
+Satisfacer dependencias:
+	sudo apt satisfy programa
+Ver y editar la lista de fuentes de software:
+	sudo apt edit-sources
+CAMBIAR Y CREAR DIRECTORIO,
+MOVER,COPIAR Y ELIMINAR
+
+Ejecutar un archivo:
+	./nombreArchivo.run
+	./directorio/subdirectorio/nombreArchivo.run
+Comando cd:
+Change directory, para cambiar de directorio.
+Ir a la carpeta de inicio: 
+	cd.
+Sube un nivel: 
+	cd..
+Volver al directorio anterior: 
+	cd-
+También puedes proporcionar la ruta absoluta de la carpeta: 
+	cd /opt/lampp/htdocs
+
+Comando mv:
+Move, para mover o renombrar archivos en el sistema de archivos.
+	mv nombre de archivo.extension  directorio_destino/
+Copiar al directorio actual:
+	mv /directorio/archivo.extension  ./(carpeta actual)
+Renombrar:
+	mv nombre_old  nombre_new
+
+
+
+Comando mkdir:
+Make directory, Para crear carpetas. 
+Solo tienes que especificar el nombre de la nueva carpeta.
+	mkdir nombreCarpeta/
+Para crear subdirectorios:
+	mkdir -p directorio/subdirectorio
+
+Comando cp:
+Copy,  basta con escribirlo junto con el nombre de origen seguido del de destino:
+	cp file.txt new_file.txt
+
+También puede copiar directorios enteros utilizando el flag recursiva:
+	cp -r dir_to_copy/ new_copy_dir/
+
+
+Comando rm
+Remove, Eliminar un archivo normal:
+	rm file.txt
+Si deseas eliminar un directorio vacío, puedes utilizar el flag recursiva (-r):
+	rm  -r  dir_to_remove/
+Para eliminar un directorio con contenido en tu interior, es necesario utilizar el flag force (-f) y recursive:
+	rm -rf dir_to_remove_with_content/
+
+
+
+
+MOSTAR RUTAS Y LISTAR CONTENIDOS
+Comando pwd:
+Print wokspace directory, muestra la ruta absoluta del directorio en que te encuentras.
+
+	pwd
+
+Comando ls
+list. Lista los elementos dentro del directorio actual o especificado.
+Listar archivos en el directorio de trabajo actual:
+	ls
+Listar archivos en otro directorio:
+	ls rutaDirectorio
+Lista de archivos en el directorio raíz
+	ls/
+Para obtener un listado con información detallada(como permisos de usuario), se utiliza el comando:
+	ls -l
+El primer elemento representado en este tipo de listado,  es una letra que representa el tipo de archivo:
+
+	Donde -->	–:  A regular file.
+			b: A block special file.
+			c: A character special file.
+			d: A directory.
+			l: A symbolic link.
+			n: A network file.
+			p: A named pipe.
+			s: A socket.
+
+zLista de archivos en formato largo con tamaños de archivo legibles:
+	ls -lh
+Lista de archivos, incluidos los archivos ocultos:
+	ls -a 
+Para listar el contenido del directorio padre un nivel más arriba.
+	ls..
+Para contenido dos niveles arriba:
+	ls../..
+Para listar el contenido en el directorio personal del usuario:
+	ls~
+Para listar todos los archivos y directorios con sus subdirectorios correspondientes hasta el último archivo:
+	ls -R
+Lista de archivos, incluidos los archivos ocultos:
+	ls -l -a
+	ls -a -l
+	ls -la
+	ls -al
+Para listar todos los elementos que contengan un nombre o formato determinado, se puede usar “*”:
+	ls *.txt
+	ls nombre*
+	ls | grep String
+Para omitir ciertos elementos en el listado:
+	ls --hide=*.extension     
+Si se quiere listar una fila por linea:
+	ls -1
+
+Comando cat:
+Concatenate.Se utiliza para listar el contenido de un archivo en la salida estándar (sdout). Para ejecutar este comando, escribe cat seguido del nombre del archivo y su extensión. Por ejemplo: 
+	cat archivo.extension
+Aquí hay otras formas de usar el comando cat:
+	cat > nombredearchivo crea un nuevo archivo.
+	cat nombredearchivo1 nombredearchivo2>nombredearchivo3 Une dos archivos (1 y 2) y almacena la salida de ellos en un nuevo archivo (3)
+convertir un archivo a mayúsculas o minúsculas:
+	cat nombredearchivo | tr a-z A-Z> salida.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMPRIMIR Y DESCOMPRIMIR FICHEROS
+Ficheros tar
+Para poder empaquetar ficheros tar, utilizamos el siguiente comando:
+	tar -cvf archivo.tar /dir/a/comprimir/
+	-c : indica a tar que cree un archivo.
+	-v : indica a tar que muestre lo que va empaquetando.
+	-f : indica a tar que el siguiente argumento es el nombre del 		      fichero.tar.
+Para poder desempaquetar los ficheros .tar, se utiliza el siguiente comando:
+	tar -xvf archivo.tar
+	-x : indica a tar que descomprima el fichero.tar.
+	-v : indica a tar que muestre lo que va desempaquetando.
+	-f : indica a tar que el siguiente argumento es el nombre del 		      fichero a desempaquetar.
+Si se quiere ver el contenido de un fichero .tar, se utiliza el siguiente comando:
+	tar -tf archivo.tar
+	-t : Lista el contenido del fichero .tar
+	-f : indica a tar que el siguiente argumento es el nombre del 
+	      fichero a ver.
+
+
+
+
+Ficheros gz
+Para comprimir ficheros en formato .gz, se utiliza el siguiente comando:
+	gzip -9 fichero
+	-9 : le indica a gz que utilice el mayor  factor de compresión posible.
+Para descomprimir ficheros .gz, se utilizara el siguiente comando:
+	gzip -d fichero.gz
+	-d : indica descompresión.
+
+
+
+Ficheros bz2
+Para comprimir ficheros en formato bz2, se utiliza el siguiente comando:
+	bzip fichero
+Para descomprimir ficheros .bz2, se usa el comando siguiente:
+	bzip2 -d fichero.bz2
+	-d : indica descompresión.
+
+
+
+
+
+-------Nota: Tanto el compresor gzip como bzip2, solo comprimen ficheros, no directorios, para comprimir directorios (carpetas), se debe de usar en combinación con tar.----------------------------------------
+
+Ficheros tar.bz2
+Para comprimir en tar.bz2, mediante el uso del parámetro pipeline ( | ). Esto permite hacer que dos programas trabajen «juntos».
+	tar -c ficheros | bzip2 > archivo.tar.bz2
+Para descomprimir ficheros tar.bz2, se utiliza el siguiente comando:
+	bzip2 -dc archivo.tar.bz2 | tar -xv
+Y para ver el contenido de un fichero tar.bz2, se usa el siguiente comando:
+
+	bzip2 -dc archivo.tar.bz2 | tar 
+
+
+
+Ficheros tar.gz
+Para comprimir ficheros en formato tar.gz, se utiliza el siguiente comando:
+	tar -czfv archivo.tar.gz ficheros
+	-c : indica a tar que cree un archivo.
+	-z : indica que use el compresor gzip.
+	-f : indica a tar que el siguiente argumento es el nombre del fichero.tar
+	-v : indica a tar que muestre lo que va empaquetando.
+Para descomprimir ficheros con extensión tar.gz, se usa el siguiente comando:
+	tar -xzvf archivo.tar.gz
+	-x : le dice a tar que extraiga el contenido del fichero tar.gz
+	-z : le indica a tar que esta comprimido con gzip
+	-v : va mostrando el contenido del fichero
+	-f : le dice a tar que el siguiente argumento es el fichero  
+	        a  descomprimir.

@@ -1,0 +1,51 @@
+guía detallada para instalar MongoDB con una interfaz gráfica en Ubuntu 22.04 y conectarlo con LAMPP:
+
+Paso 1: Instalar MongoDB
+
+Abre una terminal en Ubuntu.
+Ejecuta los siguientes comandos para importar la clave GPG del repositorio de MongoDB y agregar el repositorio a tu sistema:
+bash
+Copy code
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+Actualiza la lista de paquetes e instala MongoDB con el siguiente comando:
+sql
+Copy code
+sudo apt update
+sudo apt install mongodb-org
+El proceso de instalación también iniciará el servicio de MongoDB automáticamente. Si no se inicia, ejecuta el siguiente comando:
+sql
+Copy code
+sudo systemctl start mongod
+Verifica el estado del servicio con el siguiente comando:
+lua
+Copy code
+sudo systemctl status mongod
+Paso 2: Instalar MongoDB Compass (interfaz gráfica)
+
+Visita el sitio web oficial de MongoDB (https://www.mongodb.com/try/download/compass) y descarga la versión de MongoDB Compass para Ubuntu.
+Una vez descargado, abre la terminal y navega hasta la ubicación de la descarga.
+Ejecuta el siguiente comando para instalar MongoDB Compass:
+css
+Copy code
+sudo dpkg -i mongodb-compass_*.deb
+Si hay dependencias faltantes, ejecuta el siguiente comando para solucionarlas:
+css
+Copy code
+sudo apt --fix-broken install
+Una vez completada la instalación, puedes abrir MongoDB Compass desde el menú de aplicaciones.
+Paso 3: Conectar MongoDB con LAMPP
+
+Abre una terminal y navega hasta el directorio de instalación de LAMPP.
+Ejecuta el siguiente comando para iniciar los servicios de Apache y MySQL:
+bash
+Copy code
+sudo ./lampp start
+Abre un navegador web y visita http://localhost/phpmyadmin para acceder a phpMyAdmin, la interfaz de administración de MySQL.
+Crea una nueva base de datos para tu aplicación utilizando phpMyAdmin.
+En MongoDB Compass, haz clic en "New Connection" (Nueva conexión) para establecer una conexión con MongoDB.
+En la sección "Hostname" (Nombre del host), ingresa localhost o 127.0.0.1.
+En la sección "Port" (Puerto), ingresa el número de puerto de MongoDB, que por defecto es 27017.
+Haz clic en "Connect" (Conectar) para establecer la conexión con MongoDB.
+Ahora puedes administrar y consultar tus bases de datos y colecciones de MongoDB a través de MongoDB Compass.
+Recuerda que MongoDB y LAMPP son sistemas independientes, por lo que la conexión entre ellos se realiza a través de las aplicaciones y no directamente. Puedes utilizar MongoDB en tu aplicación PHP que se ejecuta en LAMPP utilizando la biblioteca MongoDB para PHP (https://www.php.net/manual/en/book.mongodb.php).

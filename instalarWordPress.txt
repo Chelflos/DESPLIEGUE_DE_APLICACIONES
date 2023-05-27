@@ -1,0 +1,68 @@
+Parte 2: Instalación de WordPress en el servidor LAMP
+
+Descarga el último paquete de WordPress:
+
+ 
+ 
+cd ~
+wget https://wordpress.org/latest.tar.gz
+Extrae el archivo descargado:
+
+ 
+tar -xvzf latest.tar.gz
+Mueve los archivos de WordPress al directorio de documentos de Apache:
+
+ 
+ 
+sudo mv wordpress /var/www/html/
+Configura los permisos adecuados:
+
+ 
+ 
+sudo chown -R www-data:www-data /var/www/html/wordpress
+sudo chmod -R 755 /var/www/html/wordpress
+Crea una base de datos y un usuario de My  para WordPress:
+
+ 
+ 
+sudo my  -u root -p
+CREATE DATABASE wordpress;
+CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'contraseña';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressuser'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+Renombra el archivo de configuración de WordPress:
+
+ 
+ 
+cd /var/www/html/wordpress
+sudo mv wp-config-sample.php wp-config.php
+Edita el archivo de configuración de WordPress:
+
+ 
+ 
+sudo nano wp-config.php
+Dentro del archivo, encuentra las líneas que se parezcan a esto:
+
+ 
+ 
+define('DB_NAME', 'database_name_here');
+define('DB_USER', 'username_here');
+define('DB_PASSWORD', 'password_here');
+
+Reemplaza las líneas con la siguiente información:
+
+ 
+ 
+define('DB_NAME', 'wordpress');
+define('DB_USER', 'wordpressuser');
+define('DB_PASSWORD', 'contraseña');
+Guarda los cambios y cierra el editor.
+
+Abre un navegador web e ingresa la dirección IP de tu servidor seguida de "/wordpress". Deberías ver la pantalla de instalación de WordPress.
+
+Completa la información requerida, como el título del sitio web, nombre de usuario y contraseña.
+
+Haz clic en "Instalar WordPress" y espera a que se complete el proceso.
+
+¡Felicidades! Has instalado WordPress en tu servidor LAMP.
