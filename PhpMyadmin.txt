@@ -1,0 +1,25 @@
+Paso 1: Instalar la pila LAMP
+
+Abre una terminal en Ubuntu.
+Ejecuta el siguiente comando para instalar Apache, MySQL y PHP:
+
+
+sudo apt update
+sudo apt install apache2 mysql-server php libapache2-mod-php php-mysql
+Durante la instalación de MySQL, se te pedirá configurar una contraseña para el usuario root de MySQL. Asegúrate de recordar esta contraseña, ya que la necesitarás más adelante.
+Paso 2: Instalar phpMyAdmin
+
+Ejecuta el siguiente comando para instalar phpMyAdmin:
+
+sudo apt install phpmyadmin
+Durante la instalación, se te pedirá seleccionar el servidor web que se utilizará con phpMyAdmin. Selecciona "apache2" utilizando la tecla de flecha y presiona Enter.
+A continuación, se te pedirá configurar una contraseña para phpMyAdmin. Elige una contraseña segura y confírmala.
+Durante el proceso de instalación, se realizarán configuraciones automáticas para integrar phpMyAdmin con Apache y MySQL.
+Paso 3: Configurar Apache para acceder a phpMyAdmin
+
+Abre un navegador web y visita http://localhost/phpmyadmin.
+Deberías ver la interfaz de inicio de sesión de phpMyAdmin. Ingresa el usuario "root" y la contraseña que configuraste durante la instalación de MySQL.
+Si puedes acceder correctamente, significa que phpMyAdmin está instalado y funcionando correctamente.
+phpMyAdmin se instalará en el directorio /usr/share/phpmyadmin y su configuración estará en el archivo /etc/phpmyadmin/config.inc.php. Puedes personalizar la configuración de phpMyAdmin según tus necesidades modificando este archivo.
+
+Recuerda que es importante asegurarte de mantener tus instalaciones actualizadas y aplicar las medidas de seguridad necesarias para proteger tus aplicaciones y datos.

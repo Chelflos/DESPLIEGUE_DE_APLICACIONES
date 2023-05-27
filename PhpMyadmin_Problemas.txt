@@ -1,0 +1,37 @@
+Problema: Error "No input file specified" al acceder a phpMyAdmin.
+Solución: Este error puede ocurrir debido a una configuración incorrecta en Apache. Intenta ejecutar el siguiente comando para habilitar el módulo rewrite en Apache:
+
+Copy code
+sudo a2enmod rewrite
+Luego reinicia Apache:
+
+Copy code
+sudo service apache2 restart
+Problema: No se puede acceder a phpMyAdmin desde localhost.
+Solución: Verifica que la configuración de Apache incluya la ruta a phpMyAdmin. Abre el archivo de configuración de Apache con un editor de texto, como nano o vim:
+
+bash
+Copy code
+sudo nano /etc/apache2/apache2.conf
+Asegúrate de que las siguientes líneas estén presentes y descomentadas (elimina el símbolo de numeral # al principio si está presente):
+
+bash
+Copy code
+Include /etc/phpmyadmin/apache.conf
+Guarda los cambios y reinicia Apache:
+
+Copy code
+sudo service apache2 restart
+Problema: Error "Acceso denegado" al intentar iniciar sesión en phpMyAdmin.
+Solución: Esto podría ocurrir si la contraseña de root de MySQL no está configurada correctamente en phpMyAdmin. Puedes intentar restablecer la contraseña de root de MySQL ejecutando el siguiente comando:
+
+css
+Copy code
+sudo mysql -u root -p
+Luego, dentro de MySQL, ejecuta los siguientes comandos:
+
+sql
+Copy code
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'tu_contraseña';
+FLUSH PRIVILEGES;
+Reemplaza 'tu_contraseña' con la contraseña que deseas utilizar. Sal de MySQL escribiendo exit y presionando Enter.
